@@ -1,0 +1,12 @@
+100     mTbegin         Temperatura początkowa, °C
+1000    mTime           Czas procesu, s
+1       mdTime          Krok czasowy, s
+1200    mT_otoczenia    Temperatura otoczenia, °C
+300     mAlfa           Współczynnik wymiany ciepła, W/cm²
+100     mH0             Wysokość przekroju, mm
+100     mB0             Szerokość przekroju, mm
+25      mNhH            Liczba węzłów po wysokości
+25      mNhH            Liczba węzłów po szerokości
+700     mC              Ciepło właściwe, J/(kg·°C)
+25      mK              Współczynnik przewodzenia ciepła
+7800    mR              Gęstość, kg/m³

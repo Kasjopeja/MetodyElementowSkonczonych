@@ -1,11 +1,11 @@
-#ifndef  GLOB_DATA
-#define  GLOB_DATA
+#ifndef GLOB_DATA_H
+#define GLOB_DATA_H
 
 #include <vector>
 #include "MyType.cpp"
 
-class GlobData {
-public:
+struct GlobData {
+
     // Globalne zmienne
     double mTbegin;           // Początkowa temperatura
     double mTime;             // Czas procesu

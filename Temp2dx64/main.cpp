@@ -1,19 +1,20 @@
 #include <iostream>
 #include <cmath>
-#include "GlobData.cpp"
-#include "IniEL4.cpp"
+
+#include "GlobData.h"
+#include "IniEL4.h"
+#include "InpData.h"
 
 // dane globalne
 GlobData data;
 
 // Tymczasowe deklaracjie funkcji
-void InpData();
-void GenGrid2d(double mH0, double mB0, int mNhH, int mNhB, Gr2d &mGr);
-void SetControlPoints();
-void ALLOCATE_Matrix();
-void WriteControlPointsBegin();
-void WriteControlPoints();
-void SOLVER();
+void GenGrid2d(double mH0, double mB0, int mNhH, int mNhB, Gr2d &mGr) {};
+void SetControlPoints() {};
+void ALLOCATE_Matrix() {};
+void WriteControlPointsBegin() {};
+void WriteControlPoints() {};
+void SOLVER() {};
 
 int main() {
     // Deklaracje zmiennych

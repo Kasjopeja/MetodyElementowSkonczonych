@@ -1,4 +1,4 @@
-#include "GlobData.cpp"
+#include "GlobData.h"
 extern GlobData data;
 
 void IniEL4()
