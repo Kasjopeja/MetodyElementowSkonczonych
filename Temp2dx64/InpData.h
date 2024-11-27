@@ -4,5 +4,6 @@
 #include "GlobData.h"
 
 void InpData();
+void ALLOCATE_Matrix();
 
 #endif

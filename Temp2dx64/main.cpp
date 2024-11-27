@@ -11,7 +11,6 @@ GlobData data;
 // Tymczasowe deklaracjie funkcji
 void GenGrid2d(double mH0, double mB0, int mNhH, int mNhB, Gr2d &mGr) {};
 void SetControlPoints() {};
-void ALLOCATE_Matrix() {};
 void WriteControlPointsBegin() {};
 void WriteControlPoints() {};
 void SOLVER() {};
