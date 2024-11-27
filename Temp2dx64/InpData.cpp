@@ -1,16 +1,15 @@
 #include <iostream>
 #include <fstream>
 #include <vector>
-#include "GlobData.h"
+#include "InpData.h"
 
 extern GlobData data;
 
 void InpData() {
-    std::ifstream inFile("dane.txt");
-
+    std::ifstream inFile("C:\\Users\\Lenovo\\CLionProjects\\Metody Elementow Skonczonych\\Temp2dx64\\dane.txt");
 
     if (!inFile.is_open()) {
-        std::cerr << "Błąd: Nie udało się otworzyć pliku 'indata.t2d'" << std::endl;
+        std::cerr << "Blad: Nie udalo sie otworzyc pliku 'dane.txt'" << std::endl;
         return;
     }
 
