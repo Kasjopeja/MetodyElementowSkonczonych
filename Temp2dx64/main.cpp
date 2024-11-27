@@ -10,7 +10,6 @@
 GlobData data;
 
 // Tymczasowe deklaracjie funkcji
-void GenGrid2d(double mH0, double mB0, int mNhH, int mNhB, Gr2d &mGr) {};
 void SetControlPoints() {};
 void WriteControlPointsBegin() {};
 void WriteControlPoints() {};
@@ -24,7 +23,7 @@ int main() {
     // Inicjalizacja
     IniEL4();
     InpData();
-    GenGrid2d(data.mH0, data.mB0, data.mNhH, data.mNhB, data.mGr);
+    GenGrid2d();
     SetControlPoints();
     ALLOCATE_Matrix();
     WriteControlPointsBegin();

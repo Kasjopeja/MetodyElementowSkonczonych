@@ -2,6 +2,7 @@
 #define GLOB_DATA_H
 
 #include <vector>
+#include <array>
 #include "MyType.h"
 
 struct GlobData {
@@ -26,8 +27,9 @@ struct GlobData {
     Elem mEL4;             // Dane użytego elementu skończonego
 
     // Kontrolne punkty
-    int mContrPoints[9];
-    double mcpX[9], mcpY[9];
+    std::array<double, 9> mcpX; // Współrzędne X punktów kontrolnych
+    std::array<double, 9> mcpY; // Współrzędne Y punktów kontrolnych
+    std::array<int, 9> mContrPoints; // Indeksy punktów kontrolnych w węzłach
 
     // Macierze i wektory
     double est[4][4];         // Macierz bieżącego elementu
