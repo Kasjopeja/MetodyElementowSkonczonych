@@ -2,7 +2,7 @@
 #define GLOB_DATA_H
 
 #include <vector>
-#include "MyType.cpp"
+#include "MyType.h"
 
 struct GlobData {
 

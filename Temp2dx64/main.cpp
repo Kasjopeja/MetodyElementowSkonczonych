@@ -4,6 +4,7 @@
 #include "GlobData.h"
 #include "IniEL4.h"
 #include "InpData.h"
+#include "GenGrid2d.h"
 
 // dane globalne
 GlobData data;

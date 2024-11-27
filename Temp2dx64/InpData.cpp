@@ -30,7 +30,7 @@ void InpData() {
     inFile >> data.mR; getline(inFile, temp);
 
     inFile.close();
-    std::cout << "Dane wczytane poprawnie z pliku 'indata.t2d'" << std::endl;
+    std::cout << "Dane wczytane poprawnie z pliku 'dane.txt'" << std::endl;
 }
 
 void ALLOCATE_Matrix() {
