@@ -14,5 +14,6 @@ extern GlobData data;
 void GenGrid2d();
 void WriteControlPoints();
 void SetControlPoints();
+void WriteControlPointsBegin();
 
 #endif

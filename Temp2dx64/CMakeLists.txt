@@ -12,4 +12,8 @@ add_executable(Temp2dx64 main.cpp
         InpData.h
         GenGrid2d.cpp
         GenGrid2d.h
+        SaveGridToVTK.cpp
+        SaveGridToVTK.h
+        SOLVER.cpp
+        SOLVER.h
 )

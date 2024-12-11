@@ -70,30 +70,34 @@ void GenGrid2d() {
 }
 
 // Funkcja zapisująca punkty kontrolne
-void WriteControlPoints(const GlobData &data) {
-    std::ofstream fileT("OutDataT.txt", std::ios::app);
-    std::ofstream fileCR("OutDataCR.txt", std::ios::app);
+void WriteControlPoints() {
+    std::ofstream files[2] = {
+            std::ofstream("OutDataT.txt", std::ios::app),
+            std::ofstream("OutDataCR.txt", std::ios::app)
+    };
 
-    if (!fileT.is_open() || !fileCR.is_open()) {
-        std::cerr << "Nie można otworzyć plików do zapisu punktów kontrolnych!" << std::endl;
-        return;
+    for (std::ofstream& file : files) {
+        if (!file.is_open()) {
+            std::cerr << "Nie można otworzyć plików do zapisu punktów kontrolnych!" << std::endl;
+            return;
+        }
     }
 
-    fileT << std::fixed << std::setprecision(4) << data.mTau << " ";
-    fileCR << std::fixed << std::setprecision(4) << data.mTau << " ";
-
-    for (int i = 0; i < 9; ++i) {
-        int pointIndex = data.mContrPoints[i];
-        fileT << std::fixed << std::setprecision(1) << data.mGr.ND[pointIndex].t << " ";
-        fileCR << std::fixed << std::setprecision(1) << data.mGr.ND[pointIndex].CR << " ";
+    for (int f = 0; f < 2; ++f) {
+        files[f] << std::fixed << std::setprecision(4) << data.mTau << " ";
+        for (int i = 0; i < 9; ++i) {
+            int pointIndex = data.mContrPoints[i];
+            files[f] << std::fixed << std::setprecision(1)
+                     << (f == 0 ? data.mGr.ND[pointIndex].t : data.mGr.ND[pointIndex].CR)
+                     << " ";
+        }
+        files[f] << "\n";
     }
-
-    fileT << "\n";
-    fileCR << "\n";
 }
 
+
 // Funkcja ustawiająca punkty kontrolne
-void SetControlPoints(GlobData &data) {
+void SetControlPoints() {
     data.mcpX = {0.0, data.mB0 / 2.0, data.mB0, 0.0, data.mB0 / 2.0, data.mB0, 0.0, data.mB0 / 2.0, data.mB0};
     data.mcpY = {0.0, 0.0, 0.0, data.mH0 / 2.0, data.mH0 / 2.0, data.mH0 / 2.0, data.mH0, data.mH0, data.mH0};
 
@@ -108,5 +112,31 @@ void SetControlPoints(GlobData &data) {
                 Rmin = Rr;
             }
         }
+    }
+}
+
+void WriteControlPointsBegin() {
+    std::ofstream files[2] = {
+            std::ofstream("OutDataT.txt"),
+            std::ofstream("OutDataCR.txt")
+    };
+
+    for (std::ofstream& file : files) {
+        if (!file.is_open()) {
+            std::cerr << "Failed to open output file!" << std::endl;
+            return;
+        }
+
+        file << " **********************************************************\n";
+        file << " * PROGRAM PLATE2d                                        *\n";
+        file << " ********************************************************** \n";
+        file << "\n\n";
+        file << " ********** Coordinates of the control points ************\n";
+        for (int i = 1; i <= 9; ++i) {
+            file << " No=" << std::setw(4) << i
+                 << " X=" << std::fixed << std::setprecision(2) << std::setw(8) << data.mcpX[i]
+                 << " Y=" << std::fixed << std::setprecision(2) << std::setw(8) << data.mcpY[i] << "\n";
+        }
+        file << " ********************************************************** \n";
     }
 }

@@ -5,15 +5,11 @@
 #include "IniEL4.h"
 #include "InpData.h"
 #include "GenGrid2d.h"
+#include "SaveGridToVTK.h"
+#include "SOLVER.h"
 
 // dane globalne
 GlobData data;
-
-// Tymczasowe deklaracjie funkcji
-void SetControlPoints() {};
-void WriteControlPointsBegin() {};
-void WriteControlPoints() {};
-void SOLVER() {};
 
 int main() {
     // Deklaracje zmiennych
@@ -24,6 +20,8 @@ int main() {
     IniEL4();
     InpData();
     GenGrid2d();
+    GlobData test = data; // DEBBUG
+    
     SetControlPoints();
     ALLOCATE_Matrix();
     WriteControlPointsBegin();
@@ -46,6 +44,7 @@ int main() {
     }
 
     // Zakończenie programu
+    SaveGridToVTK("C:\\Users\\Lenovo\\CLionProjects\\Metody Elementow Skonczonych\\grid_output.vtk");
     std::cout << "Closing files and deallocating memory." << std::endl;
     return 0;
 }
