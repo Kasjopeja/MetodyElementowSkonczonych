@@ -16,4 +16,8 @@ add_executable(Temp2dx64 main.cpp
         SaveGridToVTK.h
         SOLVER.cpp
         SOLVER.h
+        FeSM_heat.cpp
+        FeSM_heat.h
+        Jacob_2d.cpp
+        Jacob_2d.h
 )

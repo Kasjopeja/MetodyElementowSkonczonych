@@ -40,16 +40,6 @@ void SOLVER() {
     }
 }
 
-void FeSM_heat(int NEL) {
-    // Populate est and r arrays using the data structure
-    for (int i = 0; i < 4; ++i) {
-        for (int j = 0; j < 4; ++j) {
-            data.est[i][j] = 0.0; // Replace with actual computation
-        }
-        data.r[i] = 0.0; // Replace with actual computation
-    }
-}
-
 void DLSAQS(int nh, std::vector<std::vector<double>>& A, int LDA, int NCODA, std::vector<double>& B, std::vector<double>& X) {
     // Stub implementation for DLSAQS
     for (int i = 0; i < nh; ++i) {
