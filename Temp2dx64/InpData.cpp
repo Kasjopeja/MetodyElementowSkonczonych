@@ -6,30 +6,16 @@
 extern GlobData data;
 
 void InpData() {
-    std::ifstream inFile("C:\\Users\\Lenovo\\CLionProjects\\Metody Elementow Skonczonych\\Temp2dx64\\dane.txt");
+    std::ifstream infile("C:\\Users\\Lenovo\\CLionProjects\\Metody Elementow Skonczonych\\Temp2dx64\\dane.txt");
 
-    if (!inFile.is_open()) {
+    if (!infile) {
         std::cerr << "Blad: Nie udalo sie otworzyc pliku 'dane.txt'" << std::endl;
         return;
     }
+    infile >> data.mTbegin >> data.mTime >> data.mdTime >> data.mT_otoczenia >> data.mAlfa
+           >> data.mH0 >> data.mB0 >> data.mNhH >> data.mNhB >> data.mC >> data.mK >> data.mR;
+    infile.close();
 
-    std::string temp; // Zmienna tymczasowa do odczytu opisów
-
-    // Odczyt danych wraz z pominięciem opisów
-    inFile >> data.mTbegin; getline(inFile, temp); // Odczyt wartości i pominięcie opisu
-    inFile >> data.mTime; getline(inFile, temp);
-    inFile >> data.mdTime; getline(inFile, temp);
-    inFile >> data.mT_otoczenia; getline(inFile, temp);
-    inFile >> data.mAlfa; getline(inFile, temp);
-    inFile >> data.mH0; getline(inFile, temp);
-    inFile >> data.mB0; getline(inFile, temp);
-    inFile >> data.mNhH; getline(inFile, temp);
-    inFile >> data.mNhB; getline(inFile, temp);
-    inFile >> data.mC; getline(inFile, temp);
-    inFile >> data.mK; getline(inFile, temp);
-    inFile >> data.mR; getline(inFile, temp);
-
-    inFile.close();
     std::cout << "Dane wczytane poprawnie z pliku 'dane.txt'" << std::endl;
 }
 
@@ -64,10 +50,13 @@ void ALLOCATE_Matrix() {
     data.mLDA = mLDA;
 
     try {
-        // Alokacja macierzy i wektorów
-        data.mA.resize(data.mLDA, std::vector<double>(data.mGr.nh, 0.0));
-        data.mB.resize(data.mGr.nh, 0.0);
-        data.mX.resize(data.mGr.nh, 0.0);
+        // Alokacja macierzy rzadkiej za pomocą Eigen
+        data.mA.resize(data.mGr.nh, data.mGr.nh); // Rozmiar: nh x nh
+        data.mA.reserve(Eigen::VectorXi::Constant(data.mGr.nh, data.mLDA)); // Rezerwacja miejsca
+
+        // Inicjalizacja wektorów
+        data.mB = Eigen::VectorXd::Zero(data.mGr.nh);
+        data.mX = Eigen::VectorXd::Zero(data.mGr.nh);
     } catch (const std::bad_alloc &e) {
         std::cerr << "Błąd alokacji pamięci: " << e.what() << std::endl;
     }

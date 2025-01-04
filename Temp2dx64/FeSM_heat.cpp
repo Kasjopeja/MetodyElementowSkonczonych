@@ -17,21 +17,20 @@ void FeSM_heat(int NEL) {
 
 
 void PRE_heat_mat(int NEL) {
-    std::vector<std::vector<double>> J_inv;
-    std::vector<std::vector<double>> J_; // Jacobian and inverse Jacobian matrix
+    std::vector<std::vector<double>> J_(2, std::vector<double>(2, 0.0));
+    std::vector<std::vector<double>> J_inv(2, std::vector<double>(2, 0.0));
+
     double DetJ, Ni, Nn, Hin, Cin;
     double T0p;
-    std::vector<double> Ndx(4), Ndy(4), X(4), Y(4), Temp_0(4);
+    std::vector<double> Ndx(4), Ndy(4), Temp_0(4);
 
     for (int i = 0; i < data.mEL4.nbn; ++i) {
         int Id = std::abs(data.mGr.EL[NEL - 1].nop[i]);
-        X[i] = data.mGr.ND[Id - 1].x;
-        Y[i] = data.mGr.ND[Id - 1].y;
         Temp_0[i] = data.mGr.ND[Id - 1].t;
     }
 
     for (int P = 0; P < data.mEL4.N_p; ++P) {
-        Jacob_2d(J_, J_inv, P, data.mEL4.N_p, data.mEL4.nbn, data.mEL4.N1, data.mEL4.N2, X, Y, DetJ);
+        Jacob_2d(J_, J_inv, P, data.mEL4.N_p, NEL, data.mEL4.N1, data.mEL4.N2, DetJ);
         T0p = 0.0;
 
         for (int i = 0; i < data.mEL4.nbn; ++i) {

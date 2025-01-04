@@ -3,10 +3,12 @@
 
 #include "GlobData.h"
 #include "FeSM_heat.h"
+#include <Eigen/Sparse>
+#include <Eigen/SparseLU>
 
 extern GlobData data;
+typedef Eigen::Triplet<double> T;
 
-void DLSAQS(int, std::vector<std::vector<double>>&, int, int, std::vector<double>&, std::vector<double>&);
 void SOLVER();
 
 #endif //TEMP2DX64_SOLVER_H

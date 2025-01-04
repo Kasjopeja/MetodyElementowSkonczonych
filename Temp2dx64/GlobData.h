@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <array>
+#include <Eigen/Sparse>
 #include "MyType.h"
 
 struct GlobData {
@@ -34,9 +35,10 @@ struct GlobData {
     // Macierze i wektory
     double est[4][4];         // Macierz bieżącego elementu
     double r[4];              // Wektor obciążeń bieżącego elementu
-    std::vector<double> mB;   // Globalny wektor obciążeń
-    std::vector<std::vector<double>> mA; // Globalna macierz
-    std::vector<double> mX;   // Globalny wektor niewiadomych
+    // Macierze i wektory
+    Eigen::SparseMatrix<double> mA; // Globalna macierz równań (rzadka)
+    Eigen::VectorXd mB;            // Globalny wektor obciążeń
+    Eigen::VectorXd mX;            // Globalny wektor niewiadomych
 };
 
 #endif

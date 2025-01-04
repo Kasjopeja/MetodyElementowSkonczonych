@@ -20,11 +20,12 @@ int main() {
     IniEL4();
     InpData();
     GenGrid2d();
-    GlobData test = data; // DEBBUG
-    
+
     SetControlPoints();
     ALLOCATE_Matrix();
     WriteControlPointsBegin();
+
+    GlobData test = data; // DEBBUG
 
     // Obliczenia
     Asr = data.mK / (data.mC * data.mR);
@@ -38,13 +39,12 @@ int main() {
     for (n = 1; n <= Ntau; ++n) {
         mTau += mdTime;
 
-        SOLVER();
+       SOLVER();
 
         WriteControlPoints();
     }
 
     // Zakończenie programu
     SaveGridToVTK("C:\\Users\\Lenovo\\CLionProjects\\Metody Elementow Skonczonych\\grid_output.vtk");
-    std::cout << "Closing files and deallocating memory." << std::endl;
     return 0;
 }

@@ -98,8 +98,25 @@ void WriteControlPoints() {
 
 // Funkcja ustawiająca punkty kontrolne
 void SetControlPoints() {
-    data.mcpX = {0.0, data.mB0 / 2.0, data.mB0, 0.0, data.mB0 / 2.0, data.mB0, 0.0, data.mB0 / 2.0, data.mB0};
-    data.mcpY = {0.0, 0.0, 0.0, data.mH0 / 2.0, data.mH0 / 2.0, data.mH0 / 2.0, data.mH0, data.mH0, data.mH0};
+    data.mcpX[0] = 0.0;
+    data.mcpX[1] = data.mB0 / 2.0;
+    data.mcpX[2] = data.mB0;
+    data.mcpX[3] = 0.0;
+    data.mcpX[4] = data.mB0 / 2.0;
+    data.mcpX[5] = data.mB0;
+    data.mcpX[6] = 0.0;
+    data.mcpX[7] = data.mB0 / 2.0;
+    data.mcpX[8] = data.mB0;
+
+    data.mcpY[0] = 0.0;
+    data.mcpY[1] = 0.0;
+    data.mcpY[2] = 0.0;
+    data.mcpY[3] = data.mH0 / 2.0;
+    data.mcpY[4] = data.mH0 / 2.0;
+    data.mcpY[5] = data.mH0 / 2.0;
+    data.mcpY[6] = data.mH0;
+    data.mcpY[7] = data.mH0;
+    data.mcpY[8] = data.mH0;
 
     for (int j = 0; j < 9; ++j) {
         double Rmin = 1e10;
@@ -132,11 +149,12 @@ void WriteControlPointsBegin() {
         file << " ********************************************************** \n";
         file << "\n\n";
         file << " ********** Coordinates of the control points ************\n";
-        for (int i = 1; i <= 9; ++i) {
+        for (int i = 0; i < 9; ++i) {
             file << " No=" << std::setw(4) << i
                  << " X=" << std::fixed << std::setprecision(2) << std::setw(8) << data.mcpX[i]
                  << " Y=" << std::fixed << std::setprecision(2) << std::setw(8) << data.mcpY[i] << "\n";
         }
+
         file << " ********************************************************** \n";
     }
 }

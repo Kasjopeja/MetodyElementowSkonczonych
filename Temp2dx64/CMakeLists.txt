@@ -3,6 +3,8 @@ project(Temp2dx64)
 
 set(CMAKE_CXX_STANDARD 20)
 
+include_directories("C:/Users/Lenovo/Documents/Biblioteki/eigen-3.4.0")
+
 add_executable(Temp2dx64 main.cpp
         MyType.h
         IniEL4.cpp
