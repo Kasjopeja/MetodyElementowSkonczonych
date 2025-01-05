@@ -29,17 +29,16 @@ int main() {
 
     // Obliczenia
     Asr = data.mK / (data.mC * data.mR);
-    double mdTime = pow(data.mB0 / (1e3 * data.mNhB), 2) / (0.5 * Asr);
+    data.mdTime = pow(data.mB0 / (1e3 * data.mNhB), 2) / (0.5 * Asr);
     WriteControlPoints();
 
-    Ntau = static_cast<int>(data.mTime / mdTime) + 1;
-    mdTime = data.mTime / static_cast<double>(Ntau);
-    double mTau = 0.0;
+    Ntau = static_cast<int>(data.mTime / data.mdTime);
+    data.mTau = 0.0;
 
     for (n = 1; n <= Ntau; ++n) {
-        mTau += mdTime;
+        data.mTau += data.mdTime;
 
-       SOLVER();
+        SOLVER();
 
         WriteControlPoints();
     }

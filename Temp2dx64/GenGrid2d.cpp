@@ -150,7 +150,7 @@ void WriteControlPointsBegin() {
         file << "\n\n";
         file << " ********** Coordinates of the control points ************\n";
         for (int i = 0; i < 9; ++i) {
-            file << " No=" << std::setw(4) << i
+            file << " No=" << std::setw(4) << data.mContrPoints[i]
                  << " X=" << std::fixed << std::setprecision(2) << std::setw(8) << data.mcpX[i]
                  << " Y=" << std::fixed << std::setprecision(2) << std::setw(8) << data.mcpY[i] << "\n";
         }
