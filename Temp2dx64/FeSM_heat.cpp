@@ -121,7 +121,7 @@ void PRE_heat_pov_mat(int NEL)
                 break;
         }
 
-        std::cout << "Powierzchnia: " << id << ", DetJ: " << DetJ << std::endl;
+        //std::cout << "Powierzchnia: " << id << ", DetJ: " << DetJ << std::endl;
 
         for (int P = 0; P < 2; ++P) {
             for (int n = 0; n < 4; ++n) {
@@ -132,7 +132,7 @@ void PRE_heat_pov_mat(int NEL)
                 }
                 double Pn = data.mAlfa * data.mT_otoczenia * data.mEL4.Sf[id-1].Nf[n][P] * DetJ;
                 data.r[n] += Pn;
-                std::cout << "Pn = " << Pn << " dla powierzchni " << id << std::endl;
+                //std::cout << "Pn = " << Pn << " dla powierzchni " << id << std::endl;
             }
         }
     }
