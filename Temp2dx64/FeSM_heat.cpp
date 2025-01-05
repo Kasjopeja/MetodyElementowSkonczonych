@@ -4,14 +4,6 @@
 // Główna funkcja odpowiednik Fortranowej: SUBROUTINE FeSM_heat(NEL)
 void FeSM_heat(int NEL)
 {
-    // W Fortranie:
-    //   est = 0
-    //   r = 0
-    //   CALL PRE_heat_mat(NEL)
-    //   CALL PRE_heat_pov_mat(NEL)
-
-    // Wyzerowanie tablic data.est i data.r
-    // (po 4 węzły, ale w docelowym programie może być inna liczba)
     for(int i = 0; i < 4; i++)
     {
         data.r[i] = 0.0;
@@ -20,39 +12,22 @@ void FeSM_heat(int NEL)
             data.est[i][j] = 0.0;
         }
     }
-    // Obliczenie wkładu "objętościowego" (macierzy i wektora)
+
     PRE_heat_mat(NEL);
-
-    // Obliczenie wkładu warunków brzegowych
     PRE_heat_pov_mat(NEL);
-
 }
 
-// -----------------------------------------------------------------------------
-// Funkcja pomocnicza: oblicza część wkładu do macierzy i wektora r
-// (ten fragment w Fortranie: PRE_heat_mat(NEL)).
-//
-// Tłumaczenie z Fortrana:
-//     - wczytanie X(i), Y(i), Temp_0(i) z węzłów
-//     - pętla po punktach całkowania P
-//     - obliczenia pochodnych N1, N2 (Ndx, Ndy)
-//     - składanie do macierzy 'est' i wektora 'r'
+
 void PRE_heat_mat(int NEL)
 {
-    // Najpierw wyzerujemy / zdefiniujemy pomocnicze tablice
-    // (w Fortranie: REAL*8, DIMENSION(4):: X, Y, Temp_0, Ndx, Ndy)
     double Temp_0[4];
     std::vector<double> Y(data.mEL4.nbn);
     std::vector<double> X(data.mEL4.nbn);
     double Ndx[4], Ndy[4];
 
-    // Odczyt współrzędnych i temperatur węzłów
-    // (Uwaga: w Fortranie i=1..nbn, w C++ i=0..nbn-1)
     for(int i = 0; i < data.mEL4.nbn; ++i)
     {
-        // Fortran: Id = ABS( mGr%EL(NEL)%NOP(I) )
-        // U nas:   int Id = std::abs(data.mGr.EL[NEL].nop[i]) - 1;
-        // Jeśli nop[] przechowuje 1-based index węzła.
+
         int Id = std::abs(data.mGr.EL[NEL].nop[i]);
 
         X[i]      = data.mGr.ND[Id].x;
@@ -60,7 +35,7 @@ void PRE_heat_mat(int NEL)
         Temp_0[i] = data.mGr.ND[Id].t;
     }
 
-    // Pętla po punktach całkowania P=1..N_p (tu N_p = data.mEL4.N_p).
+    // Pętla po punktach całkowania
     for(int p = 0; p < data.mEL4.N_p; ++p)
     {
         // Obliczenie Jacobiego i jego odwrotności
@@ -82,8 +57,6 @@ void PRE_heat_mat(int NEL)
         // Wyliczenie Ndx, Ndy, zsumowanie T0p
         for(int i = 0; i < data.mEL4.nbn; ++i)
         {
-            // Fortran: Ndx(i) = N1(i,p)*J_inv(1,1) + N2(i,p)*J_inv(1,2)
-            // w C++:
             double Ni1 = data.mEL4.N1[i][p];
             double Ni2 = data.mEL4.N2[i][p];
 
@@ -94,7 +67,6 @@ void PRE_heat_mat(int NEL)
             T0p += Temp_0[i] * NiShape;
         }
 
-        // Modyfikacja DetJ: w Fortranie -> detJ = abs(detJ)*mEL4%W(p)
         DetJ = std::abs(DetJ) * data.mEL4.W[p];
 
         // Teraz składanie do macierzy est(n,i) i wektora r(n).
@@ -113,16 +85,11 @@ void PRE_heat_mat(int NEL)
 
             }
 
-            // Przykład ewentualnego dodatkowego źródła Q:
-            //  Q = 0.8 * T0p * Hp  ...
-            //  data.r[n] += (Nn * Q * DetJ);
         }
-
     }
 }
 
-// -----------------------------------------------------------------------------
-// Funkcja pomocnicza: warunki brzegowe (fortran: PRE_heat_pov_mat(NEL))
+
 void PRE_heat_pov_mat(int NEL)
 {
     double X[4], Y[4];

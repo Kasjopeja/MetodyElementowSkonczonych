@@ -4,14 +4,7 @@ void Inv_MAT(int N,
              const std::vector<std::vector<double>> &Mat,
              std::vector<std::vector<double>> &Inv)
 {
-    // ----------------------------------------------------------------------
-    // Oryginał fortranowy tworzył tablicę A o wymiarze N × (2N)
-    // i do jej lewej połowy kopiował Mat, a do prawej połowy — macierz jednostkową.
-    // Potem wykonywał eliminację Gaussa-Jordana.
-    // ----------------------------------------------------------------------
 
-    // Sprawdzamy, czy rozmiar Mat i Inv to NxN
-    // (dla bezpieczeństwa).
     if ((int)Mat.size() != N || (int)Mat[0].size() != N) {
         std::cerr << "Inv_MAT: wymiar macierzy Mat jest nieprawidłowy!\n";
         return;
@@ -21,12 +14,9 @@ void Inv_MAT(int N,
         return;
     }
 
-    // Tworzymy "A" o wymiarze N × (2N). W C++: wektor wektorów.
     std::vector<std::vector<double>> A(N, std::vector<double>(2*N, 0.0));
 
     // Inicjalizacja:
-    //   A[ i ][ j ] = Mat[i][j] dla j w [0..N-1],
-    //   A[ i ][ N+i ] = 1.0 (macierz jednostkowa w prawej części).
     for (int i = 0; i < N; i++) {
         for (int j = 0; j < N; j++) {
             A[i][j] = Mat[i][j];
