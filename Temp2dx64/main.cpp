@@ -20,6 +20,7 @@ int main() {
     IniEL4();
     InpData();
     GenGrid2d();
+    SaveGridToVTK("C:\\Users\\Lenovo\\CLionProjects\\Metody Elementow Skonczonych\\grid_output.vtk");
 
     SetControlPoints();
     ALLOCATE_Matrix();
@@ -31,6 +32,7 @@ int main() {
     Asr = data.mK / (data.mC * data.mR);
     data.mdTime = pow(data.mB0 / (1e3 * data.mNhB), 2) / (0.5 * Asr);
     WriteControlPoints();
+
 
     Ntau = static_cast<int>(data.mTime / data.mdTime);
     data.mTau = 0.0;
@@ -44,6 +46,5 @@ int main() {
     }
 
     // Zakończenie programu
-    SaveGridToVTK("C:\\Users\\Lenovo\\CLionProjects\\Metody Elementow Skonczonych\\grid_output.vtk");
     return 0;
 }
