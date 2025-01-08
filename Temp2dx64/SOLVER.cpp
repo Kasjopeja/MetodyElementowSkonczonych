@@ -45,6 +45,7 @@ void SOLVER() {
             }
             data.mB(ii) += data.r[i];
         }
+
     }
 #ifdef DEBUG
     // Debug: wypisz globalną macierz A i wektor B
@@ -52,8 +53,9 @@ void SOLVER() {
     for (int i = 0; i < data.mA.rows(); ++i) {
         for (int j = 0; j < data.mA.cols(); ++j) {
             double value = data.mA.coeff(i, j); // Uzyskanie wartości na pozycji (i, j)
-            std::cout << "A(" << i << ", " << j << ") = " << value << std::endl;
+            std::cout << "A(" << i << ", " << j << ") = " << value << " ";
         }
+        std::cout << std::endl;
     }
 
     std::cout << "Globalny wektor B:" << std::endl;

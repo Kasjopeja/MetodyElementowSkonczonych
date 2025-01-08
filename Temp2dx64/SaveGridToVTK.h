@@ -4,5 +4,6 @@
 #include <string>
 
 void SaveGridToVTK(const std::string& filename);
+void SaveResultToVTK(const std::string& filename);
 
 #endif
